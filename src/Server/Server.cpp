@@ -71,7 +71,7 @@ void irc::Server::displayChannels()
 }
 
 irc::Server::Server()
-	: upTime(currentTime()), last_ping(std::time(0)) { display.set(0, "Welcome to our \033[1;37mIRC"); }
+	: upTime(currentTime()), last_ping(std::time(0)) { display.set(0, "ft_irc is running"); }
 
 irc::Server::~Server()
 {
