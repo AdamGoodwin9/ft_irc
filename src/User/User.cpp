@@ -171,7 +171,7 @@ void irc::User::push()
 
 	if (buffer.length())
 		if (send(fd, buffer.c_str(), buffer.length(), 0) == -1)
-			error("send", false);
+			error("send failed", false);
 }
 
 irc::User::User(int fd, struct sockaddr_in address) : command_function(),
@@ -200,7 +200,7 @@ irc::User::User(int fd, struct sockaddr_in address) : command_function(),
 	hostaddr = inet_ntoa(address.sin_addr);
 	char hostname[NI_MAXHOST];
 	if (getnameinfo((struct sockaddr *)&address, sizeof(address), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV) != 0)
-		error("getnameinfo", false);
+		error("getnameinfo failed", false);
 	else
 		this->hostname = hostname;
 

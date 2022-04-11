@@ -8,7 +8,7 @@ void irc::Config::init(std::string config)
 {
 	std::ifstream ifs(config.c_str(), std::ifstream::in);
 	if (!ifs.good())
-		error("ifstream", true);
+		error("ifstream failed", true);
 
 	std::string delimiter = "=";
 	size_t position;

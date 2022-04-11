@@ -84,11 +84,11 @@ void irc::Server::init()
 {
 	int enable = 1;
 	if ((fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
-		error("socket", true);
+		error("socket failed", true);
 	if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &enable, sizeof(enable))) // reuseport flag only works on linux
-		error("setsockopt", true);
+		error("setsockopt failed", true);
 	if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0)
-		error("fcntl", true);
+		error("fcntl failed", true);
 
 	struct sockaddr_in address;
 	address.sin_family = AF_INET;
@@ -96,9 +96,9 @@ void irc::Server::init()
 	address.sin_port = htons(atoi(config.get("port").c_str()));
 
 	if (bind(fd, (struct sockaddr *)&address, sizeof(address)) < 0)
-		error("bind", true);
+		error("bind failed", true);
 	if (listen(fd, address.sin_port) < 0)
-		error("listen", true);
+		error("listen failed", true);
 
 	pfds.push_back(pollfd());
 	pfds.back().fd = fd;
